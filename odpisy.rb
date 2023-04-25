@@ -1,3 +1,4 @@
+loop do
 puts "Zadejte vstupni cenu: "
 vstupnicena = gets.strip.to_i
 puts "Zadejte odpisovou skupinu: "
@@ -23,38 +24,39 @@ zrychleneopdpisy["5"] = [30, 31, 30]
 zrychleneopdpisy["6"] = [50, 51, 50]
 
 
+
 case zpusob
 when "r"
     case skupina
     when 1
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["1"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil} Kč"
         2.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["1"][1])/100}"
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["1"][1])/100).ceil} Kč"
         end
     when 2
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["2"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil} Kč"
         4.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["2"][1])/100}" 
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["2"][1])/100).ceil} Kč" 
         end
     when 3
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["3"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil} Kč"
         9.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["3"][1])/100}"
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["3"][1])/100).ceil} Kč"
         end
     when 4
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["4"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil} Kč"
         19.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["4"][1])/100}"
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["4"][1])/100).ceil} Kč"
         end
     when 5
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["5"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil} Kč"
         29.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["5"][1])/100}"
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["5"][1])/100).ceil} Kč"
         end
     when 6
-        puts "Odpis v 1 roce: #{(vstupnicena*rovnomerneopdpisy["6"][0])/100}"
+        puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil} Kč"
         49.times do |i|
-            puts "Odpis v #{i+2} roce: #{(vstupnicena*rovnomerneopdpisy["6"][1])/100}"
+            puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["6"][1])/100).ceil} Kč"
         end
     end
 when "z"
@@ -62,57 +64,62 @@ when "z"
     when 1
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/3
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(2)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(4-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(4-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(4-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(4-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(4-i)
         end
           
     when 2
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/5
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(4)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(6-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(6-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(6-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(6-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(6-i)
         end
     when 3
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/10
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(9)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(11-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(11-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(11-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(11-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(11-i)
         end
     when 4
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/20
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(19)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(21-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(21-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(21-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(21-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(21-i)
         end
     when 5
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/30
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(29)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(31-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(31-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(31-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(31-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(31-i)
         end
     when 6
         zustatkovacena = vstupnicena
         prvnirok = zustatkovacena/50
-        puts "Odpis v 1 roce: #{prvnirok}, zustatkova cena: #{zustatkovacena-prvnirok}"
+        puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
         for i in 1.upto(49)
             zustatkovacena = zustatkovacena-prvnirok
-            puts "Odpis v #{i+1} roce: #{(2*zustatkovacena)/(51-i)}, zustatkova cena: #{zustatkovacena-(2*zustatkovacena)/(51-i)}"
+            puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(51-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(51-i)).ceil} Kč"
             prvnirok = (2*zustatkovacena)/(51-i)
         end
     end
 end
+
+puts "Chcete pokracovat vypocty? (ano/ne)"
+  answer = gets.strip.downcase
+  break if answer == "ne"
+  end
