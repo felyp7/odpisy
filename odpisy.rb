@@ -1,4 +1,11 @@
 loop do
+    def format_number(number)
+        whole, decimal = number.to_s.split(".")
+        num_groups = whole.chars.to_a.reverse.each_slice(3)
+        whole_with_commas = num_groups.map(&:join).join(',').reverse
+        [whole_with_commas, decimal].compact.join(".")
+      end
+
     puts "Zadejte vstupni cenu: "
     vstupnicena = gets.strip.to_i
     puts "Zadejte odpisovou skupinu: "
@@ -30,15 +37,20 @@ loop do
     when "r"
         case skupina
         when 1
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil}, Opravky: #{((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil)}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["1"][0])/100).ceil
             2.times do |i|
+                if (i+2==3) 
+                    odpis = vstupnicena-opravky
+                    opravky = opravky + (vstupnicena-opravky)
+                else
                 odpis = ((vstupnicena*rovnomerneopdpisy["1"][1])/100).ceil
                 opravky = opravky + odpis
-                puts "Odpis v #{i+2} roce: #{((vstupnicena*rovnomerneopdpisy["1"][1])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                end
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         when 2
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["2"][0])/100)}, Opravky: #{((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["2"][0])/100))}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["2"][0])/100).ceil
             4.times do |i|
                 if (i+2==5) 
@@ -48,10 +60,10 @@ loop do
                 odpis = ((vstupnicena*rovnomerneopdpisy["2"][1])/100).ceil
                 opravky = opravky + odpis
                 end
-                puts "Odpis v #{i+2} roce: #{odpis} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         when 3
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil}, Opravky: #{((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil)}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["3"][0])/100).ceil
             9.times do |i|
                 if (i+2==10) 
@@ -61,10 +73,10 @@ loop do
                     odpis = ((vstupnicena*rovnomerneopdpisy["3"][1])/100).ceil
                     opravky = opravky + odpis
                     end
-                puts "Odpis v #{i+2} roce: #{odpis} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         when 4
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil}, Opravky: #{((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil)}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["4"][0])/100).ceil
             19.times do |i|
                 if (i+2==20) 
@@ -74,10 +86,10 @@ loop do
                     odpis = ((vstupnicena*rovnomerneopdpisy["4"][1])/100).ceil
                     opravky = opravky + odpis
                     end
-                puts "Odpis v #{i+2} roce: #{odpis} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         when 5
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil}, Opravky: #{((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil)}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["5"][0])/100).ceil
             29.times do |i|
                 if (i+2==30) 
@@ -87,10 +99,10 @@ loop do
                     odpis = ((vstupnicena*rovnomerneopdpisy["5"][1])/100).ceil
                     opravky = opravky + odpis
                     end
-                puts "Odpis v #{i+2} roce: #{odpis} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         when 6
-            puts "Odpis v 1 roce: #{((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil} Kč, Zustatkova cena: #{vstupnicena-((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil}, Opravky: #{((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil}"
+            puts "Odpis v 1 roce: #{format_number(((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil)} Kč, Zustatkova cena: #{format_number(vstupnicena-((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil)}, Opravky: #{format_number(((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil)}"
             opravky = ((vstupnicena*rovnomerneopdpisy["6"][0])/100).ceil
             49.times do |i|
                 if (i+2==50) 
@@ -100,65 +112,77 @@ loop do
                     odpis = ((vstupnicena*rovnomerneopdpisy["6"][1])/100).ceil
                     opravky = opravky + odpis
                     end
-                puts "Odpis v #{i+2} roce: #{odpis} Kč, Zustatkova cena: #{vstupnicena-opravky}, Opravky: #{opravky}"
+                puts "Odpis v #{i+2} roce: #{format_number(odpis)} Kč, Zustatkova cena: #{format_number(vstupnicena-opravky)}, Opravky: #{format_number(opravky)}"
             end
         end
     when "z"
         case skupina
         when 1
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/3
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/3
+            opravky = zustatkovacena/3
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}"
             for i in 1.upto(2)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(4-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(4-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(4-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(4-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(4-i)).ceil)} Kč, Opravky: #{format_number(opravky)}"
             end
               
         when 2
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/5
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/5
+            opravky = zustatkovacena/5
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}"
             for i in 1.upto(4)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(6-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(6-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(6-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(6-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(6-i)).ceil)} Kč, Opravky: #{format_number(opravky)}"
             end
         when 3
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/10
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/10
+            opravky = zustatkovacena/10
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}"
             for i in 1.upto(9)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(11-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(11-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(11-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(11-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(11-i)).ceil)} Kč, Opravky: #{format_number(odpis)}"
             end
         when 4
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/20
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/20
+            opravky = zustatkovacena/20
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}"
             for i in 1.upto(19)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(21-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(21-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(21-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(21-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(21-i)).ceil)} Kč, Opravky: #{format_number(opravky)}"
             end
         when 5
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/30
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/30
+            opravky = zustatkovacena/30
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}"
             for i in 1.upto(29)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(31-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(31-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(31-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(31-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(31-i)).ceil)} Kč, Opravky: #{format_number(opravky)}"
             end
         when 6
             zustatkovacena = vstupnicena
-            prvnirok = zustatkovacena/50
-            puts "Odpis v 1 roce: #{(prvnirok).ceil} Kč, zustatkova cena: #{(zustatkovacena-prvnirok).ceil} Kč"
+            odpis = zustatkovacena/50
+            opravky = zustatkovacena/50
+            puts "Odpis v 1 roce: #{format_number((odpis).ceil)} Kč, zustatkova cena: #{format_number((zustatkovacena-odpis).ceil)} Kč, Opravky: #{format_number(opravky)}" 
             for i in 1.upto(49)
-                zustatkovacena = zustatkovacena-prvnirok
-                puts "Odpis v #{i+1} roce: #{((2*zustatkovacena)/(51-i)).ceil} Kč, zustatkova cena: #{(zustatkovacena-(2*zustatkovacena)/(51-i)).ceil} Kč"
-                prvnirok = (2*zustatkovacena)/(51-i)
+                zustatkovacena = zustatkovacena-odpis
+                odpis = ((2*zustatkovacena)/(51-i)).ceil
+                opravky = opravky+odpis
+                puts "Odpis v #{i+1} roce: #{format_number(odpis)} Kč, zustatkova cena: #{format_number((zustatkovacena-(2*zustatkovacena)/(51-i)).ceil)} Kč, Opravky: #{format_number(opravky)}"
             end
         end
     end
